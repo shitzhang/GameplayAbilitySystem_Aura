@@ -19,7 +19,9 @@ struct FEffectProperties
 {
 	GENERATED_BODY()
 
-	FEffectProperties(){}
+	FEffectProperties()
+	{
+	}
 
 	FGameplayEffectContextHandle EffectContextHandle;
 
@@ -48,7 +50,7 @@ struct FEffectProperties
 	ACharacter* TargetCharacter = nullptr;
 };
 
-template<class T>
+template <class T>
 using TStaticFuncPtr = typename TBaseStaticDelegateInstance<T, FDefaultDelegateUserPolicy>::FFuncPtr;
 
 /**
@@ -58,6 +60,7 @@ UCLASS()
 class AURA_API UAuraAttributeSet : public UAttributeSet
 {
 	GENERATED_BODY()
+
 public:
 	UAuraAttributeSet();
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
@@ -130,7 +133,7 @@ public:
 	UPROPERTY(BlueprintReadOnly, ReplicatedUsing=OnRep_MaxMana, Category = "Vital Attributes")
 	FGameplayAttributeData MaxMana;
 	ATTRIBUTE_ACCESSORS(UAuraAttributeSet, MaxMana);
-	
+
 	/*
 	 * Vital Attributes
 	 */
@@ -142,6 +145,14 @@ public:
 	UPROPERTY(BlueprintReadOnly, ReplicatedUsing=OnRep_Mana, Category = "Vital Attributes")
 	FGameplayAttributeData Mana;
 	ATTRIBUTE_ACCESSORS(UAuraAttributeSet, Mana);
+
+	/*
+	 *  Meta Attributes
+	 */
+
+	UPROPERTY(BlueprintReadOnly, Category="Meta Attributes")
+	FGameplayAttributeData IncomingDamage;
+	ATTRIBUTE_ACCESSORS(UAuraAttributeSet, IncomingDamage);
 
 	UFUNCTION()
 	void OnRep_Health(const FGameplayAttributeData& OldHealth) const;
@@ -193,7 +204,5 @@ public:
 
 private:
 	void SetEffectProperties(const FGameplayEffectModCallbackData& Data, FEffectProperties& Props);
+	void ShowFloatingText(const FEffectProperties& Props, float Damage) const;
 };
-
-
-
