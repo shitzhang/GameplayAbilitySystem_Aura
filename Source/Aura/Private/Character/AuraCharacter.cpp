@@ -12,14 +12,16 @@
 
 AAuraCharacter::AAuraCharacter()
 {
-	GetCharacterMovement()->bOrientRotationToMovement=true;
-	GetCharacterMovement()->RotationRate=FRotator(0.f,400.f,0.f);
-	GetCharacterMovement()->bConstrainToPlane=true;
-	GetCharacterMovement()->bSnapToPlaneAtStart=true;
+	GetCharacterMovement()->bOrientRotationToMovement = true;
+	GetCharacterMovement()->RotationRate = FRotator(0.f, 400.f, 0.f);
+	GetCharacterMovement()->bConstrainToPlane = true;
+	GetCharacterMovement()->bSnapToPlaneAtStart = true;
 
-	bUseControllerRotationPitch=false;
-	bUseControllerRotationYaw=false;
-	bUseControllerRotationRoll=false;
+	bUseControllerRotationPitch = false;
+	bUseControllerRotationYaw = false;
+	bUseControllerRotationRoll = false;
+
+	CharacterClass = ECharacterClass::Elementalist;
 }
 
 void AAuraCharacter::PossessedBy(AController* NewController)
@@ -56,7 +58,7 @@ void AAuraCharacter::InitAbilityActorInfo()
 	AttributeSet = AuraPlayerState->GetAttributeSet();
 
 	InitializeDefaultAttributes();
-	
+
 	if (AAuraPlayerController* AuraPlayerController = Cast<AAuraPlayerController>(GetController()))
 	{
 		if (AAuraHUD* AuraHUD = Cast<AAuraHUD>(AuraPlayerController->GetHUD()))
