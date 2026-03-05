@@ -20,7 +20,7 @@ class AURA_API UAttributeMenuWidgetController : public UAuraWidgetController
 
 public:
 	virtual void BroadcastInitialValues() override;
-	virtual void BindCallbacksToDependecies() override;
+	virtual void BindCallbacksToDependencies() override;
 
 	UPROPERTY(BlueprintAssignable, Category="GAS|Attributes")
 	FAttributeInfoSignature AttributeInfoDelegate;
