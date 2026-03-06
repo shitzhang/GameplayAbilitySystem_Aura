@@ -16,4 +16,10 @@ class AURA_API USpellMenuWidgetController : public UAuraWidgetController
 public:
 	virtual void BroadcastInitialValues() override;
 	virtual void BindCallbacksToDependencies() override;
+
+	UPROPERTY(BlueprintAssignable)
+	FOnPlayerStatChangedSignature SpellPointsChanged;
+
+	UFUNCTION(BlueprintCallable)
+	void SpellGlobeSelected(const FGameplayTag& AbilityTag);
 };
