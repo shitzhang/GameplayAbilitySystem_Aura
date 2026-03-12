@@ -8,7 +8,11 @@
 #include "UObject/Interface.h"
 #include "CombatInterface.generated.h"
 
+class UAbilitySystemComponent;
 class UNiagaraSystem;
+
+DECLARE_MULTICAST_DELEGATE_OneParam(FOnASCRegistered, UAbilitySystemComponent*);
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnDeath, AActor*, DeadActor);
 
 USTRUCT(BlueprintType)
 struct FTaggedMontage
@@ -17,13 +21,13 @@ struct FTaggedMontage
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	FGameplayTag MontageTag;
-	
+
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	FGameplayTag SocketTag;
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	TObjectPtr<UAnimMontage> Montage = nullptr;
-	
+
 	UPROPERTY(EditAnywhere, BlueprintReadOnly)
 	USoundBase* ImpactSound = nullptr;
 };
@@ -63,22 +67,25 @@ public:
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	AActor* GetAvatar();
-	
+
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	TArray<FTaggedMontage> GetAttackMontages();
-	
+
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	UNiagaraSystem* GetBloodEffect();
-	
+
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	FTaggedMontage GetTaggedMontageByTag(const FGameplayTag& MontageTag);
-	
+
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	int32 GetMinionCount();
-	
+
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	void IncrementMinionCount(int32 Amount);
 
 	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
 	ECharacterClass GetCharacterClass();
+
+	virtual FOnASCRegistered& GetOnASCRegisteredDelegate() =0;
+	virtual FOnDeath& GetOnDeathDelegate() =0;
 };
