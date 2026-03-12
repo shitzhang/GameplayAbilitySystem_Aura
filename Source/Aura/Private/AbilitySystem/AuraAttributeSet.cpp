@@ -131,7 +131,8 @@ void UAuraAttributeSet::PostGameplayEffectExecute(const FGameplayEffectModCallba
 	SetEffectProperties(Data, Props);
 
 	if (Props.TargetCharacter->Implements<UCombatInterface>() &&
-		ICombatInterface::Execute_IsDead(Props.TargetCharacter)) return;
+		ICombatInterface::Execute_IsDead(Props.TargetCharacter))
+		return;
 
 	if (Data.EvaluatedData.Attribute == GetHealthAttribute())
 	{
@@ -166,7 +167,7 @@ void UAuraAttributeSet::HandleIncomingDamage(const FEffectProperties& Props)
 			ICombatInterface* CombatInterface = Cast<ICombatInterface>(Props.TargetAvatarActor);
 			if (CombatInterface)
 			{
-				CombatInterface->Die();
+				CombatInterface->Die(UAuraAbilitySystemLibrary::GetDeathImpulse(Props.EffectContextHandle));
 			}
 			SendXPEvent(Props);
 		}
@@ -204,7 +205,7 @@ void UAuraAttributeSet::Debuff(const FEffectProperties& Props)
 	Effect->DurationPolicy = EGameplayEffectDurationType::HasDuration;
 	Effect->Period = DebuffFrequency;
 	Effect->DurationMagnitude = FScalableFloat(DebuffDuration);
-	
+
 	UTargetTagsGameplayEffectComponent& Component = Effect->AddComponent<UTargetTagsGameplayEffectComponent>();
 	FInheritedTagContainer TagContainer = FInheritedTagContainer();
 	TagContainer.Added.AddTag(GameplayTags.DamageTypesToDebuffs[DamageType]);
