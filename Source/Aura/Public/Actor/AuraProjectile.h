@@ -19,7 +19,7 @@ class AURA_API AAuraProjectile : public AActor
 public:
 	AAuraProjectile();
 
-	UPROPERTY(VisibleAnywhere)
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	TObjectPtr<UProjectileMovementComponent> ProjectileMovement;
 
 	UPROPERTY(BlueprintReadWrite, meta=(ExposeOnSpawn = true))
@@ -45,7 +45,7 @@ private:
 	float LifeSpan = 15.f;
 
 	bool bHit = false;
-	
+
 	UPROPERTY(EditAnywhere)
 	TObjectPtr<UNiagaraSystem> ImpactEffect;
 
