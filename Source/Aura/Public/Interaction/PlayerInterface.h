@@ -24,16 +24,16 @@ class AURA_API IPlayerInterface
 public:
 	UFUNCTION(BlueprintNativeEvent)
 	int32 FindLevelForXP(int32 InXP) const;
-	
+
 	UFUNCTION(BlueprintNativeEvent)
 	int32 GetXP();
-	
+
 	UFUNCTION(BlueprintNativeEvent)
 	int32 GetAttributePointsReward(int32 Level) const;
 
 	UFUNCTION(BlueprintNativeEvent)
 	int32 GetSpellPointsReward(int32 Level) const;
-	
+
 	UFUNCTION(BlueprintNativeEvent)
 	void AddToXP(int32 InXP);
 
@@ -54,4 +54,10 @@ public:
 
 	UFUNCTION(BlueprintNativeEvent)
 	void LevelUp();
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void ShowMagicCircle(UMaterialInterface* DecalMaterial = nullptr);
+
+	UFUNCTION(BlueprintNativeEvent, BlueprintCallable)
+	void HideMagicCircle();
 };

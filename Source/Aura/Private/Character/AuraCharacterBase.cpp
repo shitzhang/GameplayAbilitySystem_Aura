@@ -17,7 +17,7 @@
 
 AAuraCharacterBase::AAuraCharacterBase()
 {
-	PrimaryActorTick.bCanEverTick = false;
+	PrimaryActorTick.bCanEverTick = true;
 
 	BurnDebuffComponent = CreateDefaultSubobject<UDebuffNiagaraComponent>("BurnDebuffComponent");
 	BurnDebuffComponent->SetupAttachment(GetRootComponent());
@@ -51,7 +51,7 @@ AAuraCharacterBase::AAuraCharacterBase()
 void AAuraCharacterBase::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
-	//EffectAttachComponent->SetWorldRotation(FRotator::ZeroRotator);
+	EffectAttachComponent->SetWorldRotation(FRotator::ZeroRotator);
 }
 
 void AAuraCharacterBase::GetLifetimeReplicatedProps(TArray<class FLifetimeProperty>& OutLifetimeProps) const
