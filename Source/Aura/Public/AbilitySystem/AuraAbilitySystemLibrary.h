@@ -3,6 +3,8 @@
 #pragma once
 
 #include "CoreMinimal.h"
+#include "AbilitySystemComponent.h"
+#include "AuraAbilityTypes.h"
 #include "GameplayEffectTypes.h"
 #include "Data/CharacterClassInfo.h"
 #include "Kismet/BlueprintFunctionLibrary.h"
@@ -55,7 +57,7 @@ public:
 	/*
 	 *	Ability System Class Defaults
 	 */
-	
+
 	UFUNCTION(BlueprintCallable, Category="AuraAbilitySystemLibrary|CharacterClassDefaults")
 	static void GiveStartupAbilities(const UObject* WorldContextObject, UAbilitySystemComponent* ASC,
 	                                 ECharacterClass CharacterClass);
@@ -69,7 +71,7 @@ public:
 	/*
 	 * Effect Context Getters
 	 */
-	
+
 	UFUNCTION(BlueprintPure, Category="AuraAbilitySystemLibrary|GameplayEffects")
 	static bool IsBlockedHit(const FGameplayEffectContextHandle& EffectContextHandle);
 
@@ -112,7 +114,7 @@ public:
 	/*
 	 *	Effect Context Setters
 	 */
-	
+
 	UFUNCTION(BlueprintCallable, Category="AuraAbilitySystemLibrary|GameplayEffects")
 	static void SetIsBlockedHit(UPARAM(ref)
 	                            FGameplayEffectContextHandle& EffectContextHandle, bool bInIsBlockedHit);
@@ -151,24 +153,24 @@ public:
 
 	UFUNCTION(BlueprintCallable, Category="AuraAbilitySystemLibrary|GameplayEffects")
 	static void SetIsRadialDamage(UPARAM(ref)
-	FGameplayEffectContextHandle& EffectContextHandle, bool bInIsRadialDamage);
+	                              FGameplayEffectContextHandle& EffectContextHandle, bool bInIsRadialDamage);
 
 	UFUNCTION(BlueprintCallable, Category="AuraAbilitySystemLibrary|GameplayEffects")
 	static void SetRadialDamageInnerRadius(UPARAM(ref)
-	FGameplayEffectContextHandle& EffectContextHandle, float InInnerRadius);
+	                                       FGameplayEffectContextHandle& EffectContextHandle, float InInnerRadius);
 
 	UFUNCTION(BlueprintCallable, Category="AuraAbilitySystemLibrary|GameplayEffects")
 	static void SetRadialDamageOuterRadius(UPARAM(ref)
-	FGameplayEffectContextHandle& EffectContextHandle, float InOuterRadius);
+	                                       FGameplayEffectContextHandle& EffectContextHandle, float InOuterRadius);
 
 	UFUNCTION(BlueprintCallable, Category="AuraAbilitySystemLibrary|GameplayEffects")
 	static void SetRadialDamageOrigin(UPARAM(ref)
-	FGameplayEffectContextHandle& EffectContextHandle, const FVector& InOrigin);
+	                                  FGameplayEffectContextHandle& EffectContextHandle, const FVector& InOrigin);
 
 	/*
 	 *	Gameplay Mechanics
 	 */
-	
+
 	UFUNCTION(BlueprintCallable, Category="AuraAbilitySystemLibrary|GameplayMechanics")
 	static void GetLivePlayersWithinRadius(const UObject* WorldContextObject, TArray<AActor*>& OutOverlappingActors,
 	                                       const TArray<AActor*>& ActorsToIgnore, float Radius,
@@ -194,4 +196,27 @@ public:
 
 	static int32 GetXPRewardForClassAndLevel(const UObject* WorldContextObject, ECharacterClass CharacterClass,
 	                                         int32 CharacterLevel);
+
+	/*
+	 *	Damage Effect Params
+	 */
+
+	UFUNCTION(BlueprintCallable, Category="AuraAbilitySystemLibrary|DamageEffect")
+	static void SetIsRadialDamageEffectParam(UPARAM(ref)
+	                                         FDamageEffectParams& DamageEffectParams, bool bIsRadial,
+	                                         float InnerRadius, float OuterRadius, FVector Origin);
+
+	UFUNCTION(BlueprintCallable, Category="AuraAbilitySystemLibrary|DamageEffect")
+	static void SetKnockbackDirection(UPARAM(ref)
+	                                  FDamageEffectParams& DamageEffectParams, FVector KnockbackDirection,
+	                                  float Magnitude = 0.f);
+
+	UFUNCTION(BlueprintCallable, Category="AuraAbilitySystemLibrary|DamageEffect")
+	static void SetDeathImpulseDirection(UPARAM(ref)
+	                                     FDamageEffectParams& DamageEffectParams, FVector ImpulseDirection,
+	                                     float Magnitude = 0.f);
+
+	UFUNCTION(BlueprintCallable, Category="AuraAbilitySystemLibrary|DamageEffect")
+	static void SetTargetEffectParamsASC(UPARAM(ref)
+	                                     FDamageEffectParams& DamageEffectParams, UAbilitySystemComponent* InTargetASC);
 };
