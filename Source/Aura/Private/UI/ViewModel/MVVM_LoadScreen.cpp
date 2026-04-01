@@ -37,6 +37,7 @@ void UMVVM_LoadScreen::NewSlotButtonPressed(int32 Slot, const FString& EnteredNa
 
 	LoadSlots[Slot]->SetMapName(AuraGameMode->DefaultMapName);
 	LoadSlots[Slot]->SetPlayerName(EnteredName);
+	LoadSlots[Slot]->SetPlayerLevel(1);
 	LoadSlots[Slot]->SlotStatus = Taken;
 	LoadSlots[Slot]->PlayerStartTag = AuraGameMode->DefaultPlayerStartTag;
 
@@ -109,6 +110,7 @@ void UMVVM_LoadScreen::LoadData()
 		LoadSlotPair.Value->SlotStatus = SaveSlotStatus;
 		LoadSlotPair.Value->SetPlayerName(PlayerName);
 		LoadSlotPair.Value->SetMapName(SaveObject->MapName);
+		LoadSlotPair.Value->SetPlayerLevel(SaveObject->PlayerLevel);
 		LoadSlotPair.Value->PlayerStartTag = SaveObject->PlayerStartTag;
 		LoadSlotPair.Value->InitializeSlot();
 	}
