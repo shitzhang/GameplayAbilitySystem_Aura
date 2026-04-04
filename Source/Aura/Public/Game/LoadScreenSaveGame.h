@@ -23,10 +23,10 @@ struct FSavedActor
 	GENERATED_BODY()
 
 	UPROPERTY()
-	FName ActorName=FName();
+	FName ActorName = FName();
 
 	UPROPERTY()
-	FTransform Transform=FTransform();
+	FTransform Transform = FTransform();
 
 	// Serialized variables from the Actor - only those marked with SaveGame specifier
 	UPROPERTY()
@@ -44,7 +44,7 @@ struct FSavedMap
 	GENERATED_BODY()
 
 	UPROPERTY()
-	FString MapAssetName=FString();
+	FString MapAssetName = FString();
 
 	UPROPERTY()
 	TArray<FSavedActor> SavedActors;
@@ -101,6 +101,9 @@ public:
 	FString MapName = FString("Default Map Name");
 
 	UPROPERTY()
+	FString MapAssetName = FString("Default Map Asset Name");
+
+	UPROPERTY()
 	FName PlayerStartTag;
 
 	UPROPERTY()
@@ -142,6 +145,8 @@ public:
 	UPROPERTY()
 	TArray<FSavedAbility> SavedAbilities;
 
+	/* Maps */
+	
 	UPROPERTY()
 	TArray<FSavedMap> SavedMaps;
 
