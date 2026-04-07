@@ -11,10 +11,13 @@ TArray<FLootItem> ULootTiers::GetLootItems()
 	{
 		for (int32 i = 0; i < Item.MaxNumberToSpawn; ++i)
 		{
-			FLootItem NewItem;
-			NewItem.LootClass = Item.LootClass;
-			NewItem.bLootLevelOverride = Item.bLootLevelOverride;
-			ReturnItems.Add(NewItem);
+			if (FMath::FRandRange(1.f, 100.f) < Item.ChanceToSpawn)
+			{
+				FLootItem NewItem;
+				NewItem.LootClass = Item.LootClass;
+				NewItem.bLootLevelOverride = Item.bLootLevelOverride;
+				ReturnItems.Add(NewItem);
+			}
 		}
 	}
 
